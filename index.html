@@ -225,6 +225,46 @@
     .fact-label { font-weight: 600; color: var(--text-muted); }
     .fact-value { font-weight: bold; color: var(--text); }
 
+    /* PASSWORD OVERLAY */
+    .pw-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.78);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    }
+    .pw-card {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      width: 360px;
+      max-width: calc(100% - 40px);
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .pw-card h2 { margin-bottom: 8px; color: var(--primary); }
+    .pw-card p { margin-bottom: 14px; color: var(--text-muted); }
+    .pw-card input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+    .pw-card button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .pw-note { margin-top: 10px; font-size: 0.85rem; color: var(--text-muted); }
+
     /* Responsive */
     @media (max-width: 600px) {
       .match-card { flex-direction: column; gap: 12px; text-align: center; }
@@ -235,6 +275,19 @@
   </style>
 </head>
 <body>
+
+  <!-- PASSWORD OVERLAY -->
+  <div id="pwOverlay" class="pw-overlay" aria-hidden="false">
+    <div class="pw-card" role="dialog" aria-label="Acceso protegido">
+      <h2>Acceso protegido</h2>
+      <p>Introduce la contraseña para acceder al sitio</p>
+      <input id="pwInput" type="password" placeholder="Contraseña" aria-label="Contraseña" />
+      <div>
+        <button id="pwBtn" onclick="attemptUnlock()">Entrar</button>
+      </div>
+      <div class="pw-note">Este método es únicamente protección básica en el navegador. Para seguridad real usa autenticación del servidor.</div>
+    </div>
+  </div>
 
   <header>
     <h1>🏆 Copa Mundial de la FIFA 2026</h1>
@@ -299,6 +352,34 @@
   </div>
 
   <script>
+    // === PASSWORD SETTING (edit this) ===
+    // The password has been set to the value you requested.
+    // NOTE: This is client-side only and visible to anyone who views source.
+    const PAGE_PASSWORD = 'WC123';
+
+    let initialized = false;
+
+    function attemptUnlock() {
+      const v = document.getElementById('pwInput').value;
+      if (v === PAGE_PASSWORD) {
+        sessionStorage.setItem('site_unlocked', '1');
+        document.getElementById('pwOverlay').style.display = 'none';
+        initializeIfNeeded();
+      } else {
+        alert('Contraseña incorrecta');
+        document.getElementById('pwInput').value = '';
+        document.getElementById('pwInput').focus();
+      }
+    }
+
+    function initializeIfNeeded() {
+      if (initialized) return;
+      initCalendar();
+      initScorers();
+      initCountries();
+      initialized = true;
+    }
+
     // --- DATOS DE PARTIDOS ---
     const matchesData = {
       "2026-07-10": [
@@ -357,6 +438,7 @@
       const selector = document.getElementById('dateSelector');
       const dates = Object.keys(matchesData);
       
+      selector.innerHTML = '';
       dates.forEach((dateStr, idx) => {
         const d = new Date(dateStr + 'T00:00:00');
         const dayName = d.toLocaleDateString('es-ES', { weekday: 'short' });
@@ -374,7 +456,7 @@
       });
 
       // Mostrar por defecto la fecha final
-      renderMatches(dates[dates.length - 1]);
+      if (dates.length) renderMatches(dates[dates.length - 1]);
     }
 
     function selectDate(dateStr, btnElement) {
@@ -473,11 +555,15 @@
       document.getElementById('countryModal').classList.remove('active');
     }
 
-    // Inicializar todo al cargar la página
+    // Inicializar todo al cargar la página solo si desbloqueado
     window.onload = () => {
-      initCalendar();
-      initScorers();
-      initCountries();
+      if (sessionStorage.getItem('site_unlocked') === '1') {
+        document.getElementById('pwOverlay').style.display = 'none';
+        initializeIfNeeded();
+      } else {
+        document.getElementById('pwOverlay').style.display = 'flex';
+        document.getElementById('pwInput').focus();
+      }
     };
   </script>
 </body>
