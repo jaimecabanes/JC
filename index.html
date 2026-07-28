@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pack de Juegos Matemáticos 🚀</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap');
+
     :root {
-      --primary: #FF6B6B;
-      --secondary: #4ECDC4;
-      --accent: #FFE66D;
-      --dark: #2C3E50;
-      --light: #F7F9FC;
-      --success: #2ECC71;
-      --purple: #9B59B6;
+      --primary: #FF5E7E;
+      --secondary: #00D2D3;
+      --accent: #FF9F43;
+      --yellow: #FECA57;
+      --purple: #5F27CD;
+      --dark: #222F3E;
+      --light: #F8EFBA;
+      --success: #10AC84;
     }
 
     * {
@@ -21,50 +24,73 @@
     }
 
     body {
-      font-family: 'Fredoka', 'Comic Sans MS', sans-serif, system-ui;
-      background-color: var(--light);
+      font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       color: var(--dark);
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
 
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* CONTENEDOR PRINCIPAL TIPO APLICACIÓN */
+    .app-container {
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     h1 {
-      color: var(--primary);
+      color: white;
+      text-shadow: 3px 3px 0 var(--dark);
       text-align: center;
-      margin-bottom: 5px;
-      font-size: 2.2rem;
+      margin: 5px 0 0 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
     }
 
     .subtitle {
-      font-size: 1.1rem;
-      color: #7F8C8D;
-      margin-bottom: 20px;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.95);
+      background: rgba(0, 0, 0, 0.25);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 15px;
       text-align: center;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     /* BARRA DE PROGRESO DE LOS 3 JUEGOS */
     .progress-bar-container {
       width: 100%;
-      max-width: 600px;
-      background: #E0E0E0;
-      border-radius: 15px;
-      height: 20px;
-      margin-bottom: 20px;
-      border: 2px solid var(--dark);
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      height: 24px;
+      margin-bottom: 15px;
+      border: 3px solid var(--dark);
       overflow: hidden;
       position: relative;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.2);
     }
 
     .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--secondary), var(--success));
+      background: linear-gradient(90deg, #FECA57, #10AC84);
       width: 0%;
       transition: width 0.4s ease;
+      border-radius: 10px;
     }
 
     .progress-text {
@@ -76,58 +102,64 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--dark);
     }
 
-    /* MENÚ DE JUEGOS */
+    /* MENÚ DE NAVEGACIÓN LIBRE */
     .menu {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      margin-bottom: 15px;
+      width: 100%;
       justify-content: center;
     }
 
     .btn-game {
+      flex: 1;
       background-color: white;
       border: 3px solid var(--dark);
-      border-radius: 15px;
-      padding: 10px 16px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: default;
-      box-shadow: 0 4px 0 var(--dark);
+      border-radius: 18px;
+      padding: 10px 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 0 var(--dark);
       display: flex;
       align-items: center;
-      gap: 8px;
-      opacity: 0.6;
-      transition: all 0.3s;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      color: var(--dark);
+      font-family: inherit;
+    }
+
+    .btn-game:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 var(--dark);
+    }
+
+    .btn-game:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 var(--dark);
     }
 
     .btn-game.active {
-      opacity: 1;
-      background-color: var(--accent);
-      transform: scale(1.05);
-      border-color: var(--dark);
+      background-color: var(--yellow);
+      transform: scale(1.03);
+      box-shadow: 0 6px 0 var(--dark);
     }
 
-    .btn-game.completed {
-      opacity: 0.9;
-      background-color: #A8E6CF;
-    }
-
-    /* TARJETA DEL JUEGO */
+    /* TARJETA DEL JUEGO CON EFECTO NEUMORFISMO/3D */
     .game-card {
       background: white;
-      border: 4px solid var(--dark);
-      border-radius: 25px;
-      padding: 25px;
+      border: 5px solid var(--dark);
+      border-radius: 30px;
+      padding: 25px 20px 20px 20px;
       width: 100%;
-      max-width: 600px;
-      min-height: 420px;
-      box-shadow: 0 8px 0 var(--dark);
+      min-height: 440px;
+      box-shadow: 0 10px 0 var(--dark), 0 15px 25px rgba(0,0,0,0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -138,36 +170,40 @@
 
     .score-board {
       position: absolute;
-      top: 15px;
+      top: -15px;
       right: 20px;
       font-size: 1.1rem;
-      font-weight: bold;
-      background: var(--accent);
-      padding: 5px 15px;
+      font-weight: 700;
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 6px 18px;
       border-radius: 20px;
-      border: 2px solid var(--dark);
+      border: 3px solid var(--dark);
+      box-shadow: 0 4px 0 var(--dark);
     }
 
     .level-indicator {
       position: absolute;
-      top: 15px;
+      top: -15px;
       left: 20px;
       font-size: 1.1rem;
-      font-weight: bold;
+      font-weight: 700;
       background: #E8F8F5;
-      padding: 5px 15px;
+      color: var(--dark);
+      padding: 6px 18px;
       border-radius: 20px;
-      border: 2px solid var(--dark);
+      border: 3px solid var(--dark);
+      box-shadow: 0 4px 0 var(--dark);
     }
 
     .game-title {
       font-size: 1.4rem;
-      margin-top: 35px;
+      margin-top: 15px;
       color: var(--dark);
-      font-weight: bold;
+      font-weight: 700;
     }
 
-    /* ZONA DE VISUALIZACIÓN CORREGIDA */
+    /* ZONA DE VISUALIZACIÓN */
     .display-area {
       min-height: 150px;
       width: 100%;
@@ -177,60 +213,82 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
-      background: #F8F9FA;
-      border: 2px dashed #BDC3C7;
-      border-radius: 15px;
+      background: #F0F3F4;
+      border: 3px dashed #BDC3C7;
+      border-radius: 20px;
       padding: 15px;
     }
 
-    /* FIX CONTEO: CONTENEDOR DE EMOJIS CON TAMAÑO FIJO */
     .emoji-item {
-      font-size: 2.8rem;
+      font-size: 3rem;
       line-height: 1;
       display: inline-block;
-      animation: pop 0.3s ease;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 4px 0 rgba(0,0,0,0.1));
     }
 
-    /* FIX FORMAS: SVG CON TAMAÑO EXACTO Y VISIBLE */
+    .missing-box {
+      width: 50px;
+      height: 50px;
+      border: 3px dashed var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      background-color: #FFF0F5;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      100% { transform: scale(1.05); opacity: 1; }
+    }
+
     .shape-svg {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,0.15));
     }
 
-    /* GRID DE OPCIONES */
+    /* GRID DE OPCIONES 3D */
     .options-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 15px;
       width: 100%;
     }
 
     .btn-option {
       background-color: var(--secondary);
       color: white;
-      border: 3px solid var(--dark);
-      border-radius: 15px;
-      padding: 15px;
-      font-size: 1.6rem;
-      font-weight: bold;
+      border: 4px solid var(--dark);
+      border-radius: 20px;
+      padding: 14px;
+      font-size: 1.8rem;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 0 var(--dark);
-      transition: all 0.15s ease;
-      text-shadow: 1px 1px 0 var(--dark);
+      box-shadow: 0 6px 0 var(--dark);
+      transition: all 0.1s ease;
+      text-shadow: 2px 2px 0 var(--dark);
+      font-family: inherit;
     }
 
+    .btn-option:nth-child(2) { background-color: var(--primary); }
+    .btn-option:nth-child(3) { background-color: var(--accent); }
+    .btn-option:nth-child(4) { background-color: var(--purple); }
+
     .btn-option:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 0 var(--dark);
-      filter: brightness(1.05);
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 var(--dark);
     }
 
     .btn-option:active {
-      transform: translateY(2px);
+      transform: translateY(4px);
       box-shadow: 0 2px 0 var(--dark);
     }
 
@@ -242,9 +300,9 @@
 
     .feedback {
       font-size: 1.6rem;
-      font-weight: bold;
+      font-weight: 700;
       height: 35px;
-      margin-top: 8px;
+      margin-top: 5px;
     }
 
     /* PANTALLA FINAL */
@@ -253,7 +311,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       width: 100%;
       height: 100%;
     }
@@ -262,77 +320,83 @@
       font-size: 2.2rem;
       color: var(--primary);
       margin: 0;
+      text-shadow: 2px 2px 0 var(--dark);
     }
 
     .final-score {
-      font-size: 3rem;
-      font-weight: bold;
+      font-size: 3.2rem;
+      font-weight: 700;
       color: var(--purple);
-      margin: 10px 0;
+      margin: 5px 0;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
     }
 
     .stars-container {
-      font-size: 3.5rem;
-      margin-bottom: 10px;
+      font-size: 3.8rem;
+      margin-bottom: 5px;
     }
 
     .btn-restart {
       background-color: var(--success);
       color: white;
-      border: 3px solid var(--dark);
+      border: 4px solid var(--dark);
       border-radius: 20px;
-      padding: 15px 30px;
-      font-size: 1.4rem;
-      font-weight: bold;
+      padding: 15px 35px;
+      font-size: 1.5rem;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 0 var(--dark);
+      box-shadow: 0 6px 0 var(--dark);
+      font-family: inherit;
+      transition: all 0.15s ease;
     }
 
     .btn-restart:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 7px 0 var(--dark);
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 var(--dark);
     }
 
     .btn-restart:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 0 var(--dark);
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 var(--dark);
     }
   </style>
 </head>
 <body>
 
-  <h1>🌟 Pack Matemático 🌟</h1>
-  <div class="subtitle">¡Supera los 3 juegos (10 preguntas cada uno)!</div>
+  <div class="app-container">
+    <h1>🌟 Pack Matemático 🌟</h1>
+    <div class="subtitle">¡Aprende jugando! Completa las 15 preguntas</div>
 
-  <!-- Barra de progreso global (30 preguntas en total) -->
-  <div class="progress-bar-container">
-    <div class="progress-bar-fill" id="progress-fill"></div>
-    <div class="progress-text" id="progress-text">Progreso total: 0 / 30</div>
-  </div>
-
-  <!-- Menú Indicador de Bloques -->
-  <div class="menu">
-    <div class="btn-game active" id="badge-1">🍎 1. Contar</div>
-    <div class="btn-game" id="badge-2">➕ 2. Sumar/Restar</div>
-    <div class="btn-game" id="badge-3">📐 3. Formas</div>
-  </div>
-
-  <!-- Tarjeta del Juego -->
-  <div class="game-card" id="game-card">
-    <div class="level-indicator" id="level-indicator">Pregunta 1/10</div>
-    <div class="score-board">Puntos: <span id="score">0</span> ⭐</div>
-    
-    <div class="game-title" id="game-title">¿Cuántos elementos ves?</div>
-    
-    <div class="display-area" id="display-area">
-      <!-- Se genera dinámicamente -->
+    <!-- Barra de progreso global -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+      <div class="progress-text" id="progress-text">Progreso: 0 / 15</div>
     </div>
 
-    <div class="options-grid" id="options-grid">
-      <!-- Botones de opciones -->
+    <!-- Menú Navegable -->
+    <div class="menu">
+      <button class="btn-game active" id="badge-1" onclick="selectGameBlock(1)">🎯 Faltan para 10</button>
+      <button class="btn-game" id="badge-2" onclick="selectGameBlock(2)">➕ Sumar / Restar</button>
+      <button class="btn-game" id="badge-3" onclick="selectGameBlock(3)">📐 Formas</button>
     </div>
 
-    <div class="feedback" id="feedback"></div>
+    <!-- Tarjeta del Juego -->
+    <div class="game-card" id="game-card">
+      <div class="level-indicator" id="level-indicator">Pregunta 1/5</div>
+      <div class="score-board">Puntos: <span id="score">0</span> ⭐</div>
+      
+      <div class="game-title" id="game-title">¿Cuántos faltan para llegar a 10?</div>
+      
+      <div class="display-area" id="display-area">
+        <!-- Elementos dinámicos -->
+      </div>
+
+      <div class="options-grid" id="options-grid">
+        <!-- Opciones dinámicas -->
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+    </div>
   </div>
 
   <script>
@@ -362,8 +426,8 @@
 
       if (type === 'correct') {
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2); // A5
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); 
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2); 
         gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
         osc.start();
@@ -380,58 +444,40 @@
     }
 
     // Estado del juego
-    let currentGameBlock = 1; // 1: Contar, 2: Sumar/Restar, 3: Formas
-    let questionInBlock = 1;  // 1 a 10 por bloque
-    let totalQuestionsAnswered = 0; // 0 a 30
+    let currentGameBlock = 1;
+    let questionsPerBlock = { 1: 1, 2: 1, 3: 1 };
+    let totalQuestionsAnswered = 0;
     let score = 0;
     let correctAnswer = null;
     let isProcessing = false;
 
-    // Colección de Emojis para contar
-    const countEmojis = ['🍎', '🐶', '⭐️', '🚗', '🎈', '🐱', '🍦', '⚽️', '🦆', '🍓', '🐝', '🌼'];
+    const countEmojis = ['🍎', '🐶', '⭐️', '🚗', '🎈', '🐱', '🍦', '⚽️', '🍓', '🐝'];
 
-    // Figuras geométricas con SVG explícito
     const shapes = [
-      { 
-        name: 'Círculo', 
-        svg: `<svg class="shape-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#FF6B6B" stroke="#2C3E50" stroke-width="5"/></svg>` 
-      },
-      { 
-        name: 'Cuadrado', 
-        svg: `<svg class="shape-svg" viewBox="0 0 100 100"><rect x="12" y="12" width="76" height="76" rx="6" fill="#4ECDC4" stroke="#2C3E50" stroke-width="5"/></svg>` 
-      },
-      { 
-        name: 'Triángulo', 
-        svg: `<svg class="shape-svg" viewBox="0 0 100 100"><polygon points="50,10 90,85 10,85" fill="#FFE66D" stroke="#2C3E50" stroke-width="5"/></svg>` 
-      },
-      { 
-        name: 'Rectángulo', 
-        svg: `<svg class="shape-svg" viewBox="0 0 100 100"><rect x="8" y="25" width="84" height="50" rx="6" fill="#9B59B6" stroke="#2C3E50" stroke-width="5"/></svg>` 
-      },
-      { 
-        name: 'Estrella', 
-        svg: `<svg class="shape-svg" viewBox="0 0 100 100"><polygon points="50,5 63,35 95,38 71,60 78,92 50,75 22,92 29,60 5,38 37,35" fill="#3498DB" stroke="#2C3E50" stroke-width="4"/></svg>` 
-      },
-      { 
-        name: 'Óvalo', 
-        svg: `<svg class="shape-svg" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="42" ry="26" fill="#E67E22" stroke="#2C3E50" stroke-width="5"/></svg>` 
-      }
+      { name: 'Círculo', svg: `<svg class="shape-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#FF5E7E" stroke="#222F3E" stroke-width="6"/></svg>` },
+      { name: 'Cuadrado', svg: `<svg class="shape-svg" viewBox="0 0 100 100"><rect x="12" y="12" width="76" height="76" rx="8" fill="#00D2D3" stroke="#222F3E" stroke-width="6"/></svg>` },
+      { name: 'Triángulo', svg: `<svg class="shape-svg" viewBox="0 0 100 100"><polygon points="50,10 90,85 10,85" fill="#FECA57" stroke="#222F3E" stroke-width="6"/></svg>` },
+      { name: 'Rectángulo', svg: `<svg class="shape-svg" viewBox="0 0 100 100"><rect x="8" y="25" width="84" height="50" rx="8" fill="#5F27CD" stroke="#222F3E" stroke-width="6"/></svg>` },
+      { name: 'Estrella', svg: `<svg class="shape-svg" viewBox="0 0 100 100"><polygon points="50,5 63,35 95,38 71,60 78,92 50,75 22,92 29,60 5,38 37,35" fill="#FF9F43" stroke="#222F3E" stroke-width="5"/></svg>` },
+      { name: 'Óvalo', svg: `<svg class="shape-svg" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="42" ry="26" fill="#10AC84" stroke="#222F3E" stroke-width="6"/></svg>` }
     ];
 
+    function selectGameBlock(blockNum) {
+      currentGameBlock = blockNum;
+      generateQuestion();
+    }
+
     function updateHeaderUI() {
-      // Actualizar Badges
-      document.getElementById('badge-1').className = `btn-game ${currentGameBlock === 1 ? 'active' : (currentGameBlock > 1 ? 'completed' : '')}`;
-      document.getElementById('badge-2').className = `btn-game ${currentGameBlock === 2 ? 'active' : (currentGameBlock > 2 ? 'completed' : '')}`;
+      document.getElementById('badge-1').className = `btn-game ${currentGameBlock === 1 ? 'active' : ''}`;
+      document.getElementById('badge-2').className = `btn-game ${currentGameBlock === 2 ? 'active' : ''}`;
       document.getElementById('badge-3').className = `btn-game ${currentGameBlock === 3 ? 'active' : ''}`;
 
-      // Indicador de pregunta
-      document.getElementById('level-indicator').innerText = `Pregunta ${questionInBlock}/10`;
+      document.getElementById('level-indicator').innerText = `Pregunta ${questionsPerBlock[currentGameBlock]}/5`;
       document.getElementById('score').innerText = score;
 
-      // Barra de progreso
-      const progressPercent = (totalQuestionsAnswered / 30) * 100;
+      const progressPercent = (totalQuestionsAnswered / 15) * 100;
       document.getElementById('progress-fill').style.width = `${progressPercent}%`;
-      document.getElementById('progress-text').innerText = `Progreso total: ${totalQuestionsAnswered} / 30`;
+      document.getElementById('progress-text').innerText = `Progreso: ${totalQuestionsAnswered} / 15`;
     }
 
     function generateQuestion() {
@@ -445,7 +491,7 @@
       updateHeaderUI();
 
       if (currentGameBlock === 1) {
-        setupCountGame();
+        setupTenComplementGame();
       } else if (currentGameBlock === 2) {
         setupMathGame();
       } else if (currentGameBlock === 3) {
@@ -453,29 +499,37 @@
       }
     }
 
-    /* --- JUEGO 1: CONTAR --- */
-    function setupCountGame() {
-      const count = Math.floor(Math.random() * 9) + 1; // 1 a 9
-      correctAnswer = count;
+    /* --- JUEGO 1: ¿CUÁNTO FALTA PARA LLEGAR A 10? --- */
+    function setupTenComplementGame() {
+      const currentCount = Math.floor(Math.random() * 8) + 1;
+      correctAnswer = 10 - currentCount;
       const emoji = countEmojis[Math.floor(Math.random() * countEmojis.length)];
 
-      document.getElementById('game-title').innerText = '¿Cuántos objetos hay en el recuadro?';
-      speak('¿Cuántos objetos hay?');
+      document.getElementById('game-title').innerText = `¿Cuántos faltan para tener 10?`;
+      speak(`Hay ${currentCount}. ¿Cuántos faltan para llegar a 10?`);
 
       const display = document.getElementById('display-area');
-      for (let i = 0; i < count; i++) {
+
+      for (let i = 0; i < currentCount; i++) {
         const span = document.createElement('span');
         span.className = 'emoji-item';
         span.innerText = emoji;
         display.appendChild(span);
       }
 
-      generateNumberOptions(count, 1, 10);
+      for (let i = 0; i < correctAnswer; i++) {
+        const box = document.createElement('div');
+        box.className = 'missing-box';
+        box.innerText = '?';
+        display.appendChild(box);
+      }
+
+      generateNumberOptions(correctAnswer, 1, 9);
     }
 
     /* --- JUEGO 2: SUMAS Y RESTAS BÁSICAS --- */
     function setupMathGame() {
-      const isAddition = Math.random() > 0.4; // 60% sumas, 40% restas
+      const isAddition = Math.random() > 0.4;
       let num1, num2;
 
       if (isAddition) {
@@ -494,8 +548,8 @@
 
       const display = document.getElementById('display-area');
       const textDisplay = document.createElement('div');
-      textDisplay.style.fontSize = '3.5rem';
-      textDisplay.style.fontWeight = 'bold';
+      textDisplay.style.fontSize = '3.8rem';
+      textDisplay.style.fontWeight = '700';
       textDisplay.style.color = 'var(--dark)';
       textDisplay.innerText = isAddition ? `${num1} + ${num2}` : `${num1} - ${num2}`;
       display.appendChild(textDisplay);
@@ -514,7 +568,6 @@
       const display = document.getElementById('display-area');
       display.innerHTML = selectedShape.svg;
 
-      // Generar 4 opciones con nombres de formas aleatorias
       let optionShapes = new Set([selectedShape.name]);
       while (optionShapes.size < 4) {
         const randomShape = shapes[Math.floor(Math.random() * shapes.length)].name;
@@ -533,7 +586,7 @@
       });
     }
 
-    /* --- GENERADOR DE OPCIONES NUMÉRICAS ALEATORIAS --- */
+    /* --- GENERADOR DE OPCIONES NUMÉRICAS --- */
     function generateNumberOptions(correct, min, max) {
       let optionsSet = new Set([correct]);
       while (optionsSet.size < 4) {
@@ -552,7 +605,7 @@
       });
     }
 
-    /* --- VERIFICACIÓN DE RESPUESTAS Y FLUJO --- */
+    /* --- VERIFICACIÓN DE RESPUESTAS --- */
     function checkAnswer(userAnswer) {
       if (isProcessing) return;
       isProcessing = true;
@@ -573,49 +626,47 @@
       }
 
       totalQuestionsAnswered++;
-      questionInBlock++;
+      if (questionsPerBlock[currentGameBlock] < 5) {
+        questionsPerBlock[currentGameBlock]++;
+      }
 
-      // Verificar si completó el bloque actual de 10 preguntas
       setTimeout(() => {
-        if (questionInBlock > 10) {
-          questionInBlock = 1;
-          currentGameBlock++;
-        }
-
-        if (currentGameBlock > 3) {
+        if (totalQuestionsAnswered >= 15) {
           showFinalScreen();
         } else {
+          if (questionsPerBlock[currentGameBlock] >= 5 && currentGameBlock < 3) {
+            currentGameBlock++;
+          }
           generateQuestion();
         }
       }, 1400);
     }
 
-    /* --- PANTALLA FINAL CON RESULTADOS --- */
+    /* --- PANTALLA FINAL --- */
     function showFinalScreen() {
-      // Actualizar barra al 100%
       document.getElementById('progress-fill').style.width = '100%';
-      document.getElementById('progress-text').innerText = 'Progreso total: 30 / 30 ¡Completado!';
+      document.getElementById('progress-text').innerText = 'Progreso: 15 / 15 ¡Completado!';
 
       let stars = '⭐⭐⭐';
       let message = '¡Eres un Campeón de las Matemáticas!';
-      if (score < 200) {
+      if (score < 110) {
         stars = '⭐⭐';
         message = '¡Buen trabajo! ¡Sigue practicando!';
-      } else if (score < 150) {
+      } else if (score < 70) {
         stars = '⭐';
-        message = '¡Bien intentado! Puedes hacerlo aún mejor.';
+        message = '¡Bien intentado!';
       }
 
-      speak(`¡Felicidades! Has terminado los tres juegos con ${score} puntos.`);
+      speak(`¡Felicidades! Has terminado el reto con ${score} puntos.`);
 
       const card = document.getElementById('game-card');
       card.innerHTML = `
         <div class="final-screen">
           <h2 class="final-title">🏆 ¡Desafío Completado! 🏆</h2>
           <div class="stars-container">${stars}</div>
-          <div class="subtitle" style="font-size: 1.3rem;">${message}</div>
-          <div>Puntuación Total Obtenida:</div>
-          <div class="final-score">${score} / 300 pts</div>
+          <div class="subtitle" style="font-size: 1.2rem; background: transparent; color: var(--dark);">${message}</div>
+          <div style="font-size: 1.2rem; font-weight: 700;">Puntuación Total Obtenida:</div>
+          <div class="final-score">${score} / 150 pts</div>
           <button class="btn-restart" onclick="restartFullGame()">🔄 Jugar de Nuevo</button>
         </div>
       `;
@@ -625,7 +676,6 @@
       location.reload();
     }
 
-    // Iniciar el juego al cargar
     window.onload = () => {
       generateQuestion();
     };
